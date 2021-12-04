@@ -24,16 +24,12 @@ ENV WORDPRESS_DB_USER root
 ENV WORDPRESS_DB_PASSWORD $password
 ENV WORDPRESS_DB_NAME wordpress
 
-# Copy local code to the container image.
-ENV APP_HOME .
-ENV PORT 8080
-
-COPY gcsfuse_run.sh ./
+COPY entrypoint.sh ./
 COPY ports.conf /etc/apache2/ports.conf 
 
 EXPOSE 8080
 
 # Ensure the script is executable
-RUN chmod +x ./gcsfuse_run.sh
+RUN chmod +x ./entrypoint.sh
 
 CMD ["./entrypoint.sh"]
